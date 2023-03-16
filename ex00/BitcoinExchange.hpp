@@ -19,7 +19,7 @@ class Exception: public std::exception
             this->msg = exception.what() + msg;
         }
 
-        ~Exception() _NOEXCEPT {};
+        ~Exception()throw(){};
 
         virtual char const * what() const throw() {
             return msg.c_str();
@@ -56,7 +56,7 @@ class DateIsInvalid : public Exception
 {
     public:
         DateIsInvalid() {
-            this->msg += "Date is invalid : ";
+            this->msg += "Date doesn't exist";
         }
 };
 

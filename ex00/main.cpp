@@ -62,8 +62,8 @@ void  isDateValid(std::string key)
     int delimiter = key.find('-');
     int delimiter2 = key.rfind('-');
     std::string y = key.substr(0, delimiter);
-    std::string d = key.substr(delimiter + 1, delimiter2 - delimiter - 1);
-    std::string m = key.substr(delimiter2 + 1, key.size());
+    std::string m = key.substr(delimiter + 1, delimiter2 - delimiter - 1);
+    std::string d = key.substr(delimiter2 + 1, key.size());
 
     if (!isNumeric(y) || !isNumeric(d) || !isNumeric(m))
         throw DateHasNonNumericChar();

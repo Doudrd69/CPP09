@@ -22,7 +22,7 @@ BitcoinExchange::BitcoinExchange()
             value = key.substr(delim + 1, key.size() - delim);
             ssnb << value;
             ssnb >> nb;
-            data[key.substr(0, delim - 1)] = nb;
+            data[key.substr(0, delim)] = nb;
         }
     }
 }
@@ -48,12 +48,14 @@ float BitcoinExchange::getRate(std::string & key) {
 
     std::map<std::string, float>::iterator it = data.find(key);
 
-    std::cout << this->data.lower_bound(key)->second << std::endl;
-
-    if (it != data.end())
+    if (it != data.end()) {
+        // std::cout << it->first << " $ " << it->second << std::endl;
         return it->second;
-    else
-        return this->data.lower_bound(key)->second;
+    } else {
+        it = this->data.lower_bound(key);
+        // std::cout << it->first << " $ " << it->second << std::endl;
+        return it->second;
+    }
 }
 
 BitcoinExchange::~BitcoinExchange() {}

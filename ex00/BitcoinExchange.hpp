@@ -29,7 +29,7 @@ class Exception: public std::exception
 class ParsingFormat : public Exception {
     public:
         ParsingFormat() {
-            this->msg += "Input format invalid\n";
+            this->msg += "Input format invalid";
         }
 };
 
@@ -42,13 +42,13 @@ class CoinIsOutOfRange : public Exception
 class CoinLowerBound : public CoinIsOutOfRange
 {   public:
         CoinLowerBound() {
-            this->msg += "value is negative \n";
+            this->msg += "value is negative";
         }
 };
 class CoinUpperBound : public CoinIsOutOfRange
 {   public:
         CoinUpperBound() {
-            this->msg += "value is more than 1000.0 \n";
+            this->msg += "value is more than 1000.0";
         }
 };
 
@@ -64,7 +64,7 @@ class DateWrongFormat : public DateIsInvalid
 {
     public:
         DateWrongFormat() {
-            this->msg += "error in date format \n";
+            this->msg += "error in date format";
         }
 };
 
@@ -72,7 +72,7 @@ class DateDayInvalid : public DateIsInvalid
 {
     public:
         DateDayInvalid() {
-            this->msg += "day date is invalid \n";
+            this->msg += "day date is invalid";
         }
 };
 
@@ -80,7 +80,7 @@ class DateHasNonNumericChar : public DateIsInvalid
 {
     public:
         DateHasNonNumericChar() {
-            this->msg += "non numeric char detected \n";
+            this->msg += "non numeric char detected";
         }
 };
 

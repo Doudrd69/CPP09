@@ -104,7 +104,6 @@ std::pair<std::string, float> parse_txt(std::string & input)
     isDateValid(date);
     float valid_coin = isCoinValid(coin);
 
-    std::cout << date << " & " << valid_coin << std::endl;
     return std::make_pair(date, valid_coin);
 }
 
@@ -119,6 +118,8 @@ int main(int ac, char **av) {
     }
 
     BitcoinExchange exchange_db;
+
+    // exchange_db.printMap();
 
     getline(input, buf);
     while (getline(input, buf)) {

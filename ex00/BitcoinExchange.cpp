@@ -43,17 +43,18 @@ void BitcoinExchange::printMap()
 float BitcoinExchange::getRate(std::string & key) {
 
     //  key > data.lastkey (reverse begin is the last element) || key < data.firstkey
-    if (key > this->data.rbegin()->first || key < this->data.begin()->first)
-        throw std::out_of_range("Error : Unknown value for this key");
+    if (key > this->data.rbegin()->first)
+        throw TooRecentDate();
+    else if (key < this->data.begin()->first)
+        throw TooOldDate();
 
     std::map<std::string, float>::iterator it = data.find(key);
 
     if (it != data.end()) {
-        // std::cout << it->first << " $ " << it->second << std::endl;
         return it->second;
     } else {
         it = this->data.lower_bound(key);
-        // std::cout << it->first << " $ " << it->second << std::endl;
+        it--;
         return it->second;
     }
 }

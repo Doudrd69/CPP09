@@ -19,7 +19,7 @@ class Exception: public std::exception
             this->msg = exception.what() + msg;
         }
 
-        ~Exception() _NOEXCEPT {};
+        ~Exception() throw() {};
 
         virtual char const * what() const throw() {
             return msg.c_str();
@@ -96,4 +96,18 @@ public:
 
     void    printMap();
     float   getRate(std::string & key);
+
+    class TooRecentDate : public Exception {
+        public:
+            TooRecentDate() {
+                this->msg += "the date is too recent";
+            }
+    };
+
+    class TooOldDate : public Exception {
+        public:
+            TooOldDate() {
+                this->msg += "the date is too old";
+            }
+    };
 };

@@ -119,8 +119,6 @@ int main(int ac, char **av) {
 
     BitcoinExchange exchange_db;
 
-    // exchange_db.printMap();
-
     getline(input, buf);
     while (getline(input, buf)) {
         std::pair<std::string, float> line_values;
@@ -128,7 +126,7 @@ int main(int ac, char **av) {
             line_values = parse_txt(buf);
             displayExchangeRate(exchange_db.getRate(line_values.first), line_values);
         } catch(Exception &e) {
-            std::cerr << e.what() << '\n';
+            std::cerr << e.what() << " -> " << buf << std::endl;
         }
     }
 }

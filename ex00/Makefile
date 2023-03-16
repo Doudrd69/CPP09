@@ -1,8 +1,8 @@
 CC = c++
 FLAGS = -Wall -Wextra -Werror
 
-SRCS =	main.cpp /
-		BitcoinExchange.cpp /
+SRCS =	main.cpp \
+		BitcoinExchange.cpp
 
 INCS =	BitcoinExchange.hpp
 

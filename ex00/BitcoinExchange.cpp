@@ -53,8 +53,12 @@ float BitcoinExchange::getRate(std::string & key) {
     if (it != data.end()) {
         return it->second;
     } else {
+        // return data[I] where I is the first value >= key
         it = this->data.lower_bound(key);
+
+        // to get the previous value
         it--;
+        
         return it->second;
     }
 }

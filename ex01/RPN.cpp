@@ -1,8 +1,6 @@
 #include "RPN.hpp"
 
-rpn::rpn()
-{
-}
+rpn::rpn() {}
 
 rpn::rpn(const rpn &rhs)
 {
@@ -15,11 +13,9 @@ rpn &rpn::operator=(const rpn &rhs)
     return (*this);
 }
 
-rpn::~rpn()
-{
-}
+rpn::~rpn() {}
 
-void rpn::whichOperator(char c)
+void rpn::calculator(char c)
 {
     int operand1;
     int operand2;
@@ -45,22 +41,16 @@ void rpn::whichOperator(char c)
 
             case 47:
                 if (operand2 == 0)
-                {
-                    std::cerr << "error: cannot divide by 0" << std::endl;
-                    return ;
-                }
+                    throw DivisionByZero();
                 _stack.push(operand1 / operand2);
                 break ;
         }
     }
     else
-    {
-        std::cerr << "not enough numbers" << std::endl;
-        return ;
-    }
+        throw NotEnoughNumbers();
 }
 
-void rpn::calculate(std::string str)
+void rpn::initStack(std::string str)
 {
     std::string::iterator it = str.begin();
     std::string::iterator it2 = str.end();
@@ -70,14 +60,11 @@ void rpn::calculate(std::string str)
         if (isdigit(*it))
             _stack.push(*it - '0');
         else if (*it != ' ')
-            whichOperator(*it);
+            calculator(*it);
         it++;
     }
     if (_stack.size() != 1)
-    {
-        std::cerr << "error: More than one element" << std::endl;
-        return ;
-    }
+        throw StackTooLarge();
     else
         std::cout << "result: " << _stack.top() << std::endl;
 }

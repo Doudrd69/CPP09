@@ -10,25 +10,25 @@ bool operator_check(std::string::iterator it) {
 std::string parse_rnp(std::string rnp) {
 
     if (rnp.empty())
-        throw "Error : empty string";
-    if (rnp.find_first_not_of("123456789+-*/ ") != rnp.npos)
-        throw "Error : invalid char detected";
+        throw EmptyString();
+    if (rnp.find_first_not_of("0123456789+-*/ ") != rnp.npos)
+        throw InvalidChar();
     std::size_t _operator = rnp.find_first_of("+-*/");
     if (_operator == std::string::npos)
-        throw "Error : no operator detected";
+        throw NoOperator();
     for (std::size_t i = _operator; i < rnp.size(); i++)
     {
         if ((i <= '9' && i >= '0') && ((i + 2) != '+'))
-            throw "Error : no operator between numbers";
+            throw NoOperatorBetweenNumbers();
     }
     for(std::string::iterator it = rnp.begin(); it != rnp.end(); ++it)
     {
         if ((*it == ' ' && it == rnp.end() - 1))
-            throw "Error : space at the end of RNP";
+            throw SpaceAtTheEnd();
         if ((it == rnp.end() - 1) && operator_check(it) == false)
-            throw "Error : last char should be an operator";
+            throw LastCharIsNotOperator();
         if ((*it <= '9' && *it >= '0') && (*(it + 1) != ' ') && it != rnp.end() - 1)
-            throw "Error : no space between elements";
+            throw NoSpaceBetweenElements();
     }
     return (rnp);
 }
@@ -40,7 +40,7 @@ int main(int ac, char **av) {
         try
         {
             rpn rpn;
-            rpn.calculate(parse_rnp(av[1]));
+            rpn.initStack(parse_rnp(av[1]));
         }
         catch(const std::exception& e)
         {

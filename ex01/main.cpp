@@ -12,7 +12,10 @@ bool operator_check(std::string::iterator it) {
 void    parse_rnp(std::string rnp) {
 
     // 8 9 8 4 + ...
-    if (rnp.find_first_not_of("0123456789+-*/ ") != rnp.npos)
+    if (rnp.empty())
+        throw "Error : empty string";
+
+    if (rnp.find_first_not_of("123456789+-*/ ") != rnp.npos)
         throw "Error : invalid char detected";
 
     std::size_t _operator = rnp.find_first_of("+-*/");

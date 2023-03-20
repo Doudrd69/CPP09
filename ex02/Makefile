@@ -1,19 +1,17 @@
 CC = c++
 FLAGS = -Wall -Wextra -Werror
 
-SRCS =	srcs/main.cpp			\
-		srcs/ClapTrap.cpp		\
-		srcs/ScavTrap.cpp		\
-		srcs/FragTrap.cpp
+SRCS =	main.cpp		\
+		PmergeMe.cpp
 
-INCS =	includes/ClapTrap.hpp
+INCS =	PmergeMe.hpp
 
 OBJS = $(SRCS:.cpp=.o)
 
 %.o : %.cpp $(INCS)
 	$(CC) $(FLAGS) -std=c++98 -c $< -o $@
 
-NAME = FragTrap
+NAME = PmergeMe
 
 all : $(NAME)
 

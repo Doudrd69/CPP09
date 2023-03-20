@@ -4,6 +4,11 @@
 #include <stack>
 #include <iostream>
 #include <iterator>
+#include <string>
+#include <sstream>
+#include <fstream>
+#include <exception>
+#include <stdlib.h>
 
 class rpn
 {
@@ -19,6 +24,10 @@ public:
     ~rpn();
 
     void initStack(std::string str);
+    void printStack();
+    void calculate(std::string str);
+    void whichOperator(char c);
+
 };
 
 #endif

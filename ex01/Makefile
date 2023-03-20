@@ -1,30 +1,34 @@
-CC = c++
-FLAGS = -Wall -Wextra -Werror
+CPPC = c++
+CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRCS =	main.cpp			\
-		RPN.cpp
+SRCS = 	main.cpp	\
+		RPN.cpp		\
 
+HEADER = RPN.hpp	\
 
-INCS =	RPN.hpp
+PATH_OBJS = .objs
 
-OBJS = $(SRCS:.cpp=.o)
+OBJS = $(addprefix $(PATH_OBJS)/, $(SRCS:.cpp=.o))
 
-%.o : %.cpp $(INCS)
-	$(CC) $(FLAGS) -std=c++98 -c $< -o $@
+RM = rm -rf
 
 NAME = RPN
 
-all : $(NAME)
+all: $(NAME)
 
-$(NAME) : $(OBJS)
-	$(CC) $(FLAGS) -I $(INCS) -std=c++98 -o $(NAME) $(OBJS)
+$(PATH_OBJS)/%.o: %.cpp $(HEADER) Makefile
+				 @mkdir -p $(PATH_OBJS)
+				 $(CPPC) $(CPPFLAGS) -c $< -o $@
 
-clean :
-	rm -f $(OBJS)
+$(NAME): $(OBJS)
+		 $(CPPC) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
-fclean : clean
-	rm -f $(NAME)
+clean:
+		$(RM) $(PATH_OBJS)
 
-re : fclean all
+fclean: clean
+		$(RM) $(NAME)
 
-.PHONY : all clean fclean re
+re: fclean all
+
+.PHONY: all clean fclean re

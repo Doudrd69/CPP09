@@ -17,8 +17,8 @@ rpn::~rpn() {}
 
 void rpn::calculator(char c)
 {
-    int operand1;
-    int operand2;
+    double operand1;
+    double operand2;
 
     if (_stack.size() > 1)
     {

@@ -1,29 +1,34 @@
-CC = c++
-FLAGS = -Wall -Wextra -Werror
+CPPC = c++
+CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRCS =	main.cpp		\
-		PmergeMe.cpp
+SRCS = 	main.cpp		\
+		PmergeMe.cpp	\
 
-INCS =	PmergeMe.hpp
+HEADER = PmergeMe.hpp	\
 
-OBJS = $(SRCS:.cpp=.o)
+PATH_OBJS = .objs
 
-%.o : %.cpp $(INCS)
-	$(CC) $(FLAGS) -std=c++98 -c $< -o $@
+OBJS = $(addprefix $(PATH_OBJS)/, $(SRCS:.cpp=.o))
+
+RM = rm -rf
 
 NAME = PmergeMe
 
-all : $(NAME)
+all: $(NAME)
 
-$(NAME) : $(OBJS)
-	$(CC) $(FLAGS) -I $(INCS) -std=c++98 -o $(NAME) $(OBJS)
+$(PATH_OBJS)/%.o: %.cpp $(HEADER) Makefile
+				 @mkdir -p $(PATH_OBJS)
+				 $(CPPC) $(CPPFLAGS) -c $< -o $@
 
-clean :
-	rm -f $(OBJS)
+$(NAME): $(OBJS)
+		 $(CPPC) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
-fclean : clean
-	rm -f $(NAME)
+clean:
+		$(RM) $(PATH_OBJS)
 
-re : fclean all
+fclean: clean
+		$(RM) $(NAME)
 
-.PHONY : all clean fclean re
+re: fclean all
+
+.PHONY: all clean fclean re

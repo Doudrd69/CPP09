@@ -92,6 +92,8 @@ public:
 
 
     BitcoinExchange();
+    BitcoinExchange(const BitcoinExchange& obj);
+    BitcoinExchange& operator=(const BitcoinExchange& obj);
     ~BitcoinExchange();
 
     void    printMap();

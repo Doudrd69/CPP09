@@ -27,8 +27,8 @@ std::string parse_rnp(std::string rnp) {
             throw SpaceAtTheEnd();
         if ((it == rnp.end() - 1) && operator_check(it) == false)
             throw LastCharIsNotOperator();
-        if ((*it <= '9' && *it >= '0') && (*(it + 1) != ' ') && it != rnp.end() - 1)
-            throw NoSpaceBetweenElements();
+        // if ((*it <= '9' && *it >= '0') && (*(it + 1) != ' ') && it != rnp.end() - 1)
+        //     throw NoSpaceBetweenElements();
     }
     return (rnp);
 }

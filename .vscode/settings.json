@@ -59,6 +59,19 @@
         "variant": "cpp",
         "iostream": "cpp",
         "filesystem": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "__hash_table": "cpp",
+        "array": "cpp",
+        "bit": "cpp",
+        "cmath": "cpp",
+        "complex": "cpp",
+        "list": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "__functional_base": "cpp",
+        "algorithm": "cpp",
+        "functional": "cpp",
+        "iterator": "cpp",
+        "utility": "cpp"
     }
 }

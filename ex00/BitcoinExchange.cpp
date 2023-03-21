@@ -27,6 +27,17 @@ BitcoinExchange::BitcoinExchange()
     }
 }
 
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& obj) {
+
+    *this = obj;
+}
+
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& obj) {
+
+    this->data = obj.data;
+    return *this;
+}
+
 void BitcoinExchange::printMap()
 {
     std::map<std::string, float>::iterator end = data.end();

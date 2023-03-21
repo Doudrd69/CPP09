@@ -107,26 +107,39 @@ std::pair<std::string, float> parse_txt(std::string & input)
     return std::make_pair(date, valid_coin);
 }
 
+bool is_empty(std::ifstream& pFile)
+{
+    return pFile.peek() == std::ifstream::traits_type::eof();
+}
+
 int main(int ac, char **av) {
-    (void) ac;
-    std::ifstream input(av[1]);
-    std::string buf;
+    
+    if (ac == 2)
+    {
+        std::ifstream input(av[1]);
+        std::string buf;
 
-    if (!input.is_open()) {
-        std::cout << "File not found" << std::endl;
-        return -1;
-    }
+        if (!input.is_open()) {
+            std::cout << "File not found" << std::endl;
+            return -1;
+        }
 
-    BitcoinExchange exchange_db;
+        if (is_empty(input)) {
+            std::cout << "Empty file" << std::endl;
+            return -1;
+        }
 
-    getline(input, buf);
-    while (getline(input, buf)) {
-        std::pair<std::string, float> line_values;
-        try {
-            line_values = parse_txt(buf);
-            displayExchangeRate(exchange_db.getRate(line_values.first), line_values);
-        } catch(Exception &e) {
-            std::cerr << e.what() << " -> " << buf << std::endl;
+        BitcoinExchange exchange_db;
+
+        getline(input, buf);
+        while (getline(input, buf)) {
+            std::pair<std::string, float> line_values;
+            try {
+                line_values = parse_txt(buf);
+                displayExchangeRate(exchange_db.getRate(line_values.first), line_values);
+            } catch(Exception &e) {
+                std::cerr << e.what() << " -> " << buf << std::endl;
+            }
         }
     }
 }

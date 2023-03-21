@@ -30,4 +30,62 @@ public:
     std::deque<int> getDeque();
 };
 
+class Exception: public std::exception
+{
+    protected:
+        std::string msg;
+    public:
+        Exception() {
+            this->msg = "Exception : ";
+        }
+
+        Exception(std::exception exception) {
+            this->msg = exception.what() + msg;
+        }
+
+        ~Exception()throw(){};
+
+        virtual char const * what() const throw() {
+            return msg.c_str();
+        };
+};
+
+/* PARSING EXCEPTION */
+
+class ArgInvalid : public Exception
+{   public:
+        ArgInvalid() {
+            this->msg += "Argument is invalid : ";
+        }
+};
+
+class Underflow : public ArgInvalid
+{   public:
+        Underflow() {
+            this->msg += "input underflow";
+        }
+};
+
+class Overflow : public ArgInvalid
+{   public:
+        Overflow() {
+            this->msg += "input overflow";
+        }
+};
+
+class Duplicate : public ArgInvalid
+{   public:
+        Duplicate() {
+            this->msg += "duplicate impossible";
+        }
+};
+
+class InvalidInput : public ArgInvalid
+{   public:
+        InvalidInput() {
+            this->msg += "invalid input detected";
+        }
+};
+
+
 #endif

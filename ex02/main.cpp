@@ -50,9 +50,9 @@ int check_int(char *av)
     if (nb < INT_MIN || nb > INT_MAX)
     {
         if (nb < INT_MIN)
-            std::cerr << "error: input underflow" << std::endl;
+            throw Underflow();
         else
-            std::cerr << "error: input overflow" << std::endl;
+           throw Overflow();
         return (-1);
     }
     return (0);
@@ -61,10 +61,7 @@ int check_int(char *av)
 void    parse_args(int ac, char **av)
 {
     if (check_duplicate_numbers(ac, av) == -1)
-    {
-        std::cerr << "error: You cannot have a duplicate" << std::endl;
-        return ;
-    }
+        throw Duplicate();
     int i = 1;
     PmergeMe inst;
     while (av[i])
@@ -75,10 +72,7 @@ void    parse_args(int ac, char **av)
         while (av[i][j])
         {
             if (!isdigit(av[i][j]))
-            {
-                std::cerr << "error: invalid input detected -> [" << av[i][j] << "]" << std::endl;
-                return ;
-            }
+                throw InvalidInput();
             else
                 j++;
         }
@@ -111,5 +105,12 @@ int main(int ac, char **av)
         std::cerr << "Usage: ./PmergeMe [list of integers]" << std::endl;
         return (-1);
     }
-    parse_args(ac, av);
+    try
+    {
+        parse_args(ac, av);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 }

@@ -107,6 +107,11 @@ std::pair<std::string, float> parse_txt(std::string & input)
     return std::make_pair(date, valid_coin);
 }
 
+bool is_empty(std::ifstream& pFile)
+{
+    return pFile.peek() == std::ifstream::traits_type::eof();
+}
+
 int main(int ac, char **av) {
     
     if (ac == 2)
@@ -116,6 +121,11 @@ int main(int ac, char **av) {
 
         if (!input.is_open()) {
             std::cout << "File not found" << std::endl;
+            return -1;
+        }
+
+        if (is_empty(input)) {
+            std::cout << "Empty file" << std::endl;
             return -1;
         }
 

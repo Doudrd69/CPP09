@@ -33,6 +33,20 @@ class ParsingFormat : public Exception {
         }
 };
 
+class WrongValueFormat : public ParsingFormat {
+    public:
+        WrongValueFormat() {
+            this->msg += " : more than one value detected";
+        }
+};
+
+class NonNumericalValuet : public ParsingFormat {
+    public:
+        NonNumericalValuet() {
+            this->msg += " : non-numerical value detected";
+        }
+};
+
 class CoinIsOutOfRange : public Exception
 {   public:
         CoinIsOutOfRange() {

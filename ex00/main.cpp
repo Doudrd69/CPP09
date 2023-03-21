@@ -6,23 +6,35 @@ float isCoinValid(std::string value) {
 
     char    *end;
 
-    long int    int_input = std::strtol(value.c_str(), &end, 10);
-    if (int_input > 1000)
-        throw CoinUpperBound();
-    if (int_input < 0)
-        throw CoinLowerBound();
-    if (*end == 0)
-        return (static_cast<float>(int_input));
+    int i = 0;
+    while (value[i] == ' ')
+        i++;
+    if (value[i] <= 58 || value[i] >= 48)
+    {
+        while (value[i])
+        {
+            if (value[i] == ' ')
+                throw WrongValueFormat();
+            i++;
+        }
 
-    float       float_input = std::strtof(value.c_str(), &end);
-    if (float_input > 1000)
-        throw CoinUpperBound();
-    if (float_input < 0)
-        throw CoinLowerBound();
-    if (*end == 0)
-        return (float_input);
+        long int    int_input = std::strtol(value.c_str(), &end, 10);
+        if (int_input > 1000)
+            throw CoinUpperBound();
+        if (int_input < 0)
+            throw CoinLowerBound();
+        if (*end == 0)
+            return (static_cast<float>(int_input));
 
-    throw std::invalid_argument("Error : non-numerical value : ");
+        float       float_input = std::strtof(value.c_str(), &end);
+        if (float_input > 1000)
+            throw CoinUpperBound();
+        if (float_input < 0)
+            throw CoinLowerBound();
+        if (*end == 0)
+            return (float_input);
+    } 
+    throw NonNumericalValuet();
 }
 
 int  countChar(std::string str, char c)

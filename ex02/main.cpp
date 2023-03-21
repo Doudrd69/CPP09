@@ -2,6 +2,8 @@
 
 void vectorMergeSort(std::vector<int> &arr, int begin, int end, int mid_size);
 void vectorMerge(std::vector<int> &arr, int begin, int middle, int end);
+void dequeMergeSort(std::deque<int> &arr, int begin, int end, int mid_size);
+void dequeMerge(std::deque<int> &arr, int begin, int middle, int end);
 
 void    printVector(std::vector<int> const &input)
 {
@@ -9,7 +11,7 @@ void    printVector(std::vector<int> const &input)
     std::cout << std::endl;
 }
 
-void    printList(std::list<int> const &input)
+void    printDeque(std::deque<int> const &input)
 {
     std::copy(input.begin(), input.end(), std::ostream_iterator<int>(std::cout, " "));
     std::cout << std::endl;
@@ -85,15 +87,21 @@ void    parse_args(int ac, char **av)
     }
     std::cout << "vector: ";
     printVector(inst.getVector());
-    std::cout << "list: ";
-    printList(inst.getList());
+    std::cout << "deque: ";
+    printDeque(inst.getDeque());
+    std::cout << "\nSorted containers: " << std::endl;
 
     std::vector<int> tmp_vector(inst.getVector());
-    // std::list<int> tmp_list(inst.getList());
+    std::deque<int> tmp_deque(inst.getDeque());
 
     vectorMergeSort(tmp_vector, 0, inst.getVector().size() - 1, inst.getVector().size() / 2);
     std::cout << "sorted vector: ";
     printVector(tmp_vector);
+
+
+    dequeMergeSort(tmp_deque, 0, inst.getDeque().size() - 1, inst.getDeque().size() / 2);
+    std::cout << "sorted deque: ";
+    printDeque(tmp_deque);
 }
 
 int main(int ac, char **av)

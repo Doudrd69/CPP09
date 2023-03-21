@@ -3,8 +3,8 @@
 
 #include <iostream>
 #include <stdlib.h>
-#include <list>
 #include <vector>
+#include <deque>
 #include <iterator>
 #include <limits.h>
 #include <cstring>
@@ -14,7 +14,7 @@ class PmergeMe
 private:
 
     std::vector<int> _vector;
-    std::list<int> _list;
+    std::deque<int> _deque;
 
 public:
 
@@ -25,7 +25,7 @@ public:
 
     void set(int nb);
     std::vector<int> getVector();
-    std::list<int> getList();
+    std::deque<int> getDeque();
 };
 
 #endif

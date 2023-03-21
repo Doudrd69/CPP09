@@ -76,7 +76,6 @@ void    vectorMerge(std::vector<int> &arr, int begin, int middle, int end) {
         j++;
         k++;
     }
-
     return ;
 }
 
@@ -93,7 +92,6 @@ void    vectorMergeSort(std::vector<int> &arr, int begin, int end, int mid_size)
     }
     else
         vectorInsertionSort(arr, begin, end);
-
 }
 
 /* == DEQUE MERGE-INSERT-SORT == */
@@ -154,7 +152,6 @@ void    dequeMerge(std::deque<int> &arr, int begin, int middle, int end) {
         j++;
         k++;
     }
-
     return ;
 }
 
@@ -171,7 +168,6 @@ void    dequeMergeSort(std::deque<int> &arr, int begin, int end, int mid_size) {
     }
     else
         dequeInsertionSort(arr, begin, end);
-
 }
 
 /* == CLASS UTILS == */

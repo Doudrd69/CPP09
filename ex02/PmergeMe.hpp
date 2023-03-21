@@ -8,6 +8,8 @@
 #include <iterator>
 #include <limits.h>
 #include <cstring>
+#include <sys/time.h>
+#include <time.h>
 
 class PmergeMe
 {

@@ -58,6 +58,40 @@ int check_int(char *av)
     return (0);
 }
 
+void    printAndSort(PmergeMe &inst)
+{
+    std::cout << "vector: ";
+    printVector(inst.getVector());
+    std::cout << "deque: ";
+    printDeque(inst.getDeque());
+
+    std::vector<int> tmp_vector(inst.getVector());
+    std::deque<int> tmp_deque(inst.getDeque());
+
+    struct timeval startVec, endVec;
+    double execTimeVec;
+
+    gettimeofday(&startVec, NULL);
+    vectorMergeSort(tmp_vector, 0, inst.getVector().size() - 1, inst.getVector().size() / 2);
+    gettimeofday(&endVec, NULL);
+    execTimeVec = static_cast<double>((endVec.tv_sec - startVec.tv_sec) * 1000000 + (endVec.tv_usec - startVec.tv_usec));
+    std::cout << "sorted vector: ";
+    printVector(tmp_vector);
+
+    struct timeval startDeque, endDeque;
+    double execTimeDeque;
+
+    gettimeofday(&startDeque, NULL);
+    dequeMergeSort(tmp_deque, 0, inst.getDeque().size() - 1, inst.getDeque().size() / 2);
+    gettimeofday(&endDeque, NULL);
+    execTimeDeque = static_cast<double>((endDeque.tv_sec - startDeque.tv_sec) * 1000000 + (endDeque.tv_usec - startDeque.tv_usec));
+    std::cout << "sorted deque: ";
+    printDeque(tmp_deque);
+
+    std::cout << "Time to process a range of " << inst.getVector().size() << " elements with std::vector : " << execTimeVec << " µs" << std::endl;
+    std::cout << "Time to process a range of " << inst.getDeque().size() << " elements with std::deque : " << execTimeDeque << " µs" << std::endl;
+}
+
 void    parse_args(int ac, char **av)
 {
     if (check_duplicate_numbers(ac, av) == -1)
@@ -85,23 +119,7 @@ void    parse_args(int ac, char **av)
         inst.set(atoi(av[i]));
         i++;
     }
-    std::cout << "vector: ";
-    printVector(inst.getVector());
-    std::cout << "deque: ";
-    printDeque(inst.getDeque());
-    std::cout << "\nSorted containers: " << std::endl;
-
-    std::vector<int> tmp_vector(inst.getVector());
-    std::deque<int> tmp_deque(inst.getDeque());
-
-    vectorMergeSort(tmp_vector, 0, inst.getVector().size() - 1, inst.getVector().size() / 2);
-    std::cout << "sorted vector: ";
-    printVector(tmp_vector);
-
-
-    dequeMergeSort(tmp_deque, 0, inst.getDeque().size() - 1, inst.getDeque().size() / 2);
-    std::cout << "sorted deque: ";
-    printDeque(tmp_deque);
+    printAndSort(inst);
 }
 
 int main(int ac, char **av)

@@ -1,7 +1,7 @@
 #include "PmergeMe.hpp"
 
-void vectorMergeSort(std::vector<int> &arr, int left, int right);
-void vectorMerge(std::vector<int> &arr, int left, int middle, int right);
+void vectorMergeSort(std::vector<int> &arr, int begin, int end, int mid_size);
+void vectorMerge(std::vector<int> &arr, int begin, int middle, int end);
 
 void    printVector(std::vector<int> const &input)
 {
@@ -91,7 +91,7 @@ void    parse_args(int ac, char **av)
     std::vector<int> tmp_vector(inst.getVector());
     // std::list<int> tmp_list(inst.getList());
 
-    vectorMergeSort(tmp_vector, 0, inst.getVector().size() - 1);
+    vectorMergeSort(tmp_vector, 0, inst.getVector().size() - 1, inst.getVector().size() / 2);
     std::cout << "sorted vector: ";
     printVector(tmp_vector);
 }

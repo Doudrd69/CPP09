@@ -16,23 +16,36 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& obj) {
 
 PmergeMe::~PmergeMe() {}
 
-void    vectorMerge(std::vector<int> &arr, int left, int middle, int right) {
+void    insertionSort(std::vector<int> &arr, int begin, int end) {
 
-    int left_size = middle - left + 1;
-    int right_size = right - middle;
+    for (int i = begin; i < end; i++) {
+        int tempVal = arr[i + 1];
+        int j = i + 1;
+        while (j > begin && arr[j - 1] > tempVal) {
+            arr[j] = arr[j - 1];
+            j--;
+        }
+        arr[j] = tempVal;
+    }
+}
+
+void    vectorMerge(std::vector<int> &arr, int begin, int middle, int end) {
+
+    int left_size = middle - begin + 1;
+    int right_size = end - middle;
 
     std::vector<int> tmp_left(left_size);
     std::vector<int> tmp_right(right_size);
 
     for (int i = 0; i < left_size; i++)
-        tmp_left[i] = arr[left + i];
+        tmp_left[i] = arr[begin + i];
 
     for (int i = 0; i < right_size; i++)
         tmp_right[i] = arr[middle + 1 + i];
 
     int i, j, k;
 
-    i = 0, j = 0, k = left;
+    i = 0, j = 0, k = begin;
 
     while (i < left_size && j < right_size)
     {
@@ -63,17 +76,21 @@ void    vectorMerge(std::vector<int> &arr, int left, int middle, int right) {
     return ;
 }
 
-void    vectorMergeSort(std::vector<int> &arr, int left, int right) {
+void    vectorMergeSort(std::vector<int> &arr, int begin, int end, int mid_size) {
 
-    if (left >= right)
-        return ;
 
-    int middle = (left + right) / 2;
+    if (end - begin > mid_size)
+    {
+        int middle = (begin + end) / 2;
 
-    vectorMergeSort(arr, left, middle);
-    vectorMergeSort(arr, middle + 1, right);
+        vectorMergeSort(arr, begin, middle, mid_size);
+        vectorMergeSort(arr, middle + 1, end, mid_size);
 
-    vectorMerge(arr, left, middle, right);
+        vectorMerge(arr, begin, middle, end);
+    }
+    else
+        insertionSort(arr, begin, end);
+
 }
 
 void PmergeMe::set(int nb)

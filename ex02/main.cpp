@@ -1,5 +1,8 @@
 #include "PmergeMe.hpp"
 
+void vectorMergeSort(std::vector<int> &arr, int left, int right);
+void vectorMerge(std::vector<int> &arr, int left, int middle, int right);
+
 void    printVector(std::vector<int> const &input)
 {
     std::copy(input.begin(), input.end(), std::ostream_iterator<int>(std::cout, " "));
@@ -53,7 +56,7 @@ int check_int(char *av)
     return (0);
 }
 
-void parse_args(int ac, char **av)
+void    parse_args(int ac, char **av)
 {
     if (check_duplicate_numbers(ac, av) == -1)
     {
@@ -85,6 +88,12 @@ void parse_args(int ac, char **av)
     std::cout << "list: ";
     printList(inst.getList());
 
+    std::vector<int> tmp_vector(inst.getVector());
+    // std::list<int> tmp_list(inst.getList());
+
+    vectorMergeSort(tmp_vector, 0, inst.getVector().size() - 1);
+    std::cout << "sorted vector: ";
+    printVector(tmp_vector);
 }
 
 int main(int ac, char **av)

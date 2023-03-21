@@ -24,8 +24,6 @@ public:
     ~PmergeMe();
 
     void set(int nb);
-    void vectorMergeSort(std::vector<int> &arr, int left, int right);
-    void vectorMerge(std::vector<int> &arr, int left, int middle, int right);
     std::vector<int> getVector();
     std::list<int> getList();
 };

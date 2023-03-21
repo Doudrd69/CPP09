@@ -1,25 +1,6 @@
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe() {
-
-    this->_vector.push_back(4);
-    this->_vector.push_back(1);
-    this->_vector.push_back(9);
-    this->_vector.push_back(6);
-
-    int array_size = this->_vector.size();
-
-    std::cout << "Unsorted array : " << std::endl;
-    for (int i = 0; i < array_size; i++)
-        std::cout << this->_vector[i] << " - ";
-    std::cout << "\n\n=============" << std::endl;
-
-    vectorMergeSort(this->_vector, 0, array_size - 1);
-
-    std::cout << "\nSorted array : " << std::endl;
-    for (int i = 0; i < array_size; i++)
-        std::cout << this->_vector[i] << " - ";
-}
+PmergeMe::PmergeMe() {}
 
 PmergeMe::PmergeMe(const PmergeMe& obj) {
 
@@ -33,7 +14,9 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& obj) {
     return *this;
 }
 
-void    PmergeMe::vectorMerge(std::vector<int> &arr, int left, int middle, int right) {
+PmergeMe::~PmergeMe() {}
+
+void    vectorMerge(std::vector<int> &arr, int left, int middle, int right) {
 
     int left_size = middle - left + 1;
     int right_size = right - middle;
@@ -80,9 +63,7 @@ void    PmergeMe::vectorMerge(std::vector<int> &arr, int left, int middle, int r
     return ;
 }
 
-PmergeMe::~PmergeMe() {}
-
-void    PmergeMe::vectorMergeSort(std::vector<int> &arr, int left, int right) {
+void    vectorMergeSort(std::vector<int> &arr, int left, int right) {
 
     if (left >= right)
         return ;
@@ -93,4 +74,20 @@ void    PmergeMe::vectorMergeSort(std::vector<int> &arr, int left, int right) {
     vectorMergeSort(arr, middle + 1, right);
 
     vectorMerge(arr, left, middle, right);
+}
+
+void PmergeMe::set(int nb)
+{
+    _vector.push_back(nb);
+    _list.push_back(nb);
+}
+
+std::vector<int> PmergeMe::getVector()
+{
+    return (_vector);
+}
+
+std::list<int> PmergeMe::getList()
+{
+    return (_list);
 }

@@ -98,6 +98,7 @@ void    vectorMergeSort(std::vector<int> &arr, int begin, int end, int mid_size)
 
 void    dequeInsertionSort(std::deque<int> &arr, int begin, int end) {
 
+    std::cout << "INSERT_SORT" << std::endl;
     for (int i = begin; i < end; i++) {
         int tmp = arr[i + 1];
         int j = i + 1;
@@ -111,6 +112,8 @@ void    dequeInsertionSort(std::deque<int> &arr, int begin, int end) {
 
 void    dequeMerge(std::deque<int> &arr, int begin, int middle, int end) {
 
+
+    std::cout << "issou merge" << std::endl;
     int left_size = middle - begin + 1;
     int right_size = end - middle;
 
@@ -157,9 +160,9 @@ void    dequeMerge(std::deque<int> &arr, int begin, int middle, int end) {
 
 void    dequeMergeSort(std::deque<int> &arr, int begin, int end, int mid_size) {
 
-
     if (end - begin > mid_size)
     {
+        std::cout << "MERGE_SORT" << std::endl;
         int middle = (begin + end) / 2;
 
         dequeMergeSort(arr, begin, middle, mid_size);

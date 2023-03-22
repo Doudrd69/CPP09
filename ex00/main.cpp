@@ -79,6 +79,8 @@ void  isDateValid(std::string key)
 
     if (!isNumeric(y) || !isNumeric(d) || !isNumeric(m))
         throw DateHasNonNumericChar();
+    if (y.size() != 4 || m.size() != 2 || d.size() != 2)
+        throw DateWrongFormat();
 
     int year = atoi(y.c_str());
     int day = atoi(d.c_str());
